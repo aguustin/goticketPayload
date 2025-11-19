@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    userModel: UserModel;
+    ticketsModel: TicketsModel;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +80,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    userModel: UserModelSelect<false> | UserModelSelect<true>;
+    ticketsModel: TicketsModelSelect<false> | TicketsModelSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -160,6 +164,183 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "userModel".
+ */
+export interface UserModel {
+  id: string;
+  imagenProductora?: string | null;
+  dniRepresentante?: number | null;
+  domicilioProductora?: string | null;
+  mailProductora?: string | null;
+  cuitProductora?: number | null;
+  telefonoProductora?: number | null;
+  paisProductora?: string | null;
+  razonSocial?: string | null;
+  contrasenia?: string | null;
+  codigoInternacional?: string | null;
+  rol?: number | null;
+  descuento?: number | null;
+  nombreCompleto?: string | null;
+  dni?: number | null;
+  domicilio?: string | null;
+  cuit?: number | null;
+  mail?: string | null;
+  telefono?: number | null;
+  pais?: string | null;
+  cbu?: number | null;
+  alias?: string | null;
+  nombreTitular?: string | null;
+  nombreProductora?: string | null;
+  cbuProductora?: number | null;
+  aliasProductora?: string | null;
+  nombreTitularProductora?: string | null;
+  numeroCuenta?: number | null;
+  nombreBanco?: string | null;
+  descuentoProductora?: number | null;
+  cortesias?:
+    | {
+        cortesiaId?: string | null;
+        qty?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  redes?:
+    | {
+        instagram?: string | null;
+        facebook?: string | null;
+        whatsapp?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  favorites?:
+    | {
+        eventId?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ticketsModel".
+ */
+export interface TicketsModel {
+  id: string;
+  identificadorEventos?: string | null;
+  userId?: string | null;
+  tipoMoneda?: string | null;
+  tipoEvento?: number | null;
+  eventoEdad?: number | null;
+  consumoDeCarta?: string | null;
+  nombreEvento?: string | null;
+  montoVentas?: number | null;
+  porcentajeRRPP?: number | null;
+  efectivo?: number | null;
+  linkEvento?: string | null;
+  categorias?:
+    | {
+        nombreCategoria?: string | null;
+        vendidos?: number | null;
+        devoluciones?: number | null;
+        cortesías?: number | null;
+        valorUnidad?: number | null;
+        montoVendido?: number | null;
+        montoDevoluciones?: number | null;
+        montoDescuento?: number | null;
+        montoTotal?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  artistas?: string | null;
+  descripcionEvento?: string | null;
+  aviso?: string | null;
+  categoriasEventos?:
+    | {
+        value?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  fechaInicio?: string | null;
+  fechaFin?: string | null;
+  provincia?: string | null;
+  localidad?: string | null;
+  direccion?: string | null;
+  lugarEvento?: string | null;
+  imgEvento?: string | null;
+  bannerEvento?: string | null;
+  imagenDescriptiva?: string | null;
+  linkVideo?: string | null;
+  eventosRelacionados?:
+    | {
+        idEvento?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  tickets?:
+    | {
+        nombreTicket?: string | null;
+        descripcionTicket?: string | null;
+        precio?: number | null;
+        cantidad?: number | null;
+        ventas?: number | null;
+        fechaDeCierre?: string | null;
+        visibilidad?: string | null;
+        estado?: number | null;
+        imgTicket?: string | null;
+        limit?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  cortesiaRRPP?:
+    | {
+        nombreTicket?: string | null;
+        descripcionTicket?: string | null;
+        cantidadDeCortesias?: number | null;
+        entregados?: number | null;
+        fechaDeCierre?: string | null;
+        visibilidad?: string | null;
+        estado?: number | null;
+        imgTicket?: string | null;
+        distribution?: number | null;
+        email?: string | null;
+        limit?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  rrpp?:
+    | {
+        nombre?: string | null;
+        mail?: string | null;
+        mailEncriptado?: string | null;
+        mailHash?: string | null;
+        linkDePago?: string | null;
+        ventasRRPP?:
+          | {
+              ticketId?: string | null;
+              nombreCategoria?: string | null;
+              vendidos?: number | null;
+              total?: number | null;
+              id?: string | null;
+            }[]
+          | null;
+        ticketsCortesias?:
+          | {
+              ticketIdCortesia?: string | null;
+              cantidadDeCortesias?: number | null;
+              id?: string | null;
+            }[]
+          | null;
+        montoCorrespondienteRRPP?: number | null;
+        montoTotalVendidoRRPP?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -189,6 +370,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'userModel';
+        value: string | UserModel;
+      } | null)
+    | ({
+        relationTo: 'ticketsModel';
+        value: string | TicketsModel;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -271,6 +460,181 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "userModel_select".
+ */
+export interface UserModelSelect<T extends boolean = true> {
+  imagenProductora?: T;
+  dniRepresentante?: T;
+  domicilioProductora?: T;
+  mailProductora?: T;
+  cuitProductora?: T;
+  telefonoProductora?: T;
+  paisProductora?: T;
+  razonSocial?: T;
+  contrasenia?: T;
+  codigoInternacional?: T;
+  rol?: T;
+  descuento?: T;
+  nombreCompleto?: T;
+  dni?: T;
+  domicilio?: T;
+  cuit?: T;
+  mail?: T;
+  telefono?: T;
+  pais?: T;
+  cbu?: T;
+  alias?: T;
+  nombreTitular?: T;
+  nombreProductora?: T;
+  cbuProductora?: T;
+  aliasProductora?: T;
+  nombreTitularProductora?: T;
+  numeroCuenta?: T;
+  nombreBanco?: T;
+  descuentoProductora?: T;
+  cortesias?:
+    | T
+    | {
+        cortesiaId?: T;
+        qty?: T;
+        id?: T;
+      };
+  redes?:
+    | T
+    | {
+        instagram?: T;
+        facebook?: T;
+        whatsapp?: T;
+        id?: T;
+      };
+  favorites?:
+    | T
+    | {
+        eventId?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ticketsModel_select".
+ */
+export interface TicketsModelSelect<T extends boolean = true> {
+  identificadorEventos?: T;
+  userId?: T;
+  tipoMoneda?: T;
+  tipoEvento?: T;
+  eventoEdad?: T;
+  consumoDeCarta?: T;
+  nombreEvento?: T;
+  montoVentas?: T;
+  porcentajeRRPP?: T;
+  efectivo?: T;
+  linkEvento?: T;
+  categorias?:
+    | T
+    | {
+        nombreCategoria?: T;
+        vendidos?: T;
+        devoluciones?: T;
+        cortesías?: T;
+        valorUnidad?: T;
+        montoVendido?: T;
+        montoDevoluciones?: T;
+        montoDescuento?: T;
+        montoTotal?: T;
+        id?: T;
+      };
+  artistas?: T;
+  descripcionEvento?: T;
+  aviso?: T;
+  categoriasEventos?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  fechaInicio?: T;
+  fechaFin?: T;
+  provincia?: T;
+  localidad?: T;
+  direccion?: T;
+  lugarEvento?: T;
+  imgEvento?: T;
+  bannerEvento?: T;
+  imagenDescriptiva?: T;
+  linkVideo?: T;
+  eventosRelacionados?:
+    | T
+    | {
+        idEvento?: T;
+        id?: T;
+      };
+  tickets?:
+    | T
+    | {
+        nombreTicket?: T;
+        descripcionTicket?: T;
+        precio?: T;
+        cantidad?: T;
+        ventas?: T;
+        fechaDeCierre?: T;
+        visibilidad?: T;
+        estado?: T;
+        imgTicket?: T;
+        limit?: T;
+        id?: T;
+      };
+  cortesiaRRPP?:
+    | T
+    | {
+        nombreTicket?: T;
+        descripcionTicket?: T;
+        cantidadDeCortesias?: T;
+        entregados?: T;
+        fechaDeCierre?: T;
+        visibilidad?: T;
+        estado?: T;
+        imgTicket?: T;
+        distribution?: T;
+        email?: T;
+        limit?: T;
+        id?: T;
+      };
+  rrpp?:
+    | T
+    | {
+        nombre?: T;
+        mail?: T;
+        mailEncriptado?: T;
+        mailHash?: T;
+        linkDePago?: T;
+        ventasRRPP?:
+          | T
+          | {
+              ticketId?: T;
+              nombreCategoria?: T;
+              vendidos?: T;
+              total?: T;
+              id?: T;
+            };
+        ticketsCortesias?:
+          | T
+          | {
+              ticketIdCortesia?: T;
+              cantidadDeCortesias?: T;
+              id?: T;
+            };
+        montoCorrespondienteRRPP?: T;
+        montoTotalVendidoRRPP?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
