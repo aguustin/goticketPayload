@@ -11,7 +11,9 @@ import { Users } from './collections/Users';
 import { Media } from './collections/Media';
 import { UserModel } from './collections/UserModel';
 import { TicketsModel } from './collections/TicketsModel';
+import dotenv from "dotenv"
 
+dotenv.config()
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -22,22 +24,22 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  db: mongooseAdapter({
+    url: process.env.DATABASE_URI || '',
+  }),
   collections: [Users, Media, UserModel, TicketsModel],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
-  }),
   sharp,
   plugins: [
     // Aquí podrías agregar más plugins
   ],
   // Hook onInit: se ejecuta al iniciar Payload
   onInit: async (payload) => {
-    console.log('Payload iniciado: importando usuarios...');
+   console.log(process.env.DATABASE_URI)
     try {
       const response = await fetch("https://gomarket-1-backend.onrender.com/getAllUsers");
       const users = await response.json();
@@ -89,6 +91,68 @@ export default buildConfig({
           });
           importedCount++;
         }
+      }
+
+      const responseEvents = await fetch("https://gomarket-1-backend.onrender.com/getAllEvents");
+      const events = await responseEvents.json();
+      let importedCountEvents = 0;
+
+      for(const event of events){
+          const exists = await payload.find({
+            collection: 'ticketsModel',
+            where: { nombreEvento: { equals: event.nombreEvento } },
+          });
+          if (exists.totalDocs === 0) {
+              await payload.create({
+                collection: 'ticketsModel',
+                data:{
+                      soldOut: event.soldOut || false,
+                      identificadorEventos: event.identificadorEventos || '',
+                      userId: event.userId || '',
+                      prodMail: event.prodMail || '', 
+                      numeroEvento: event.numeroEvento || 0,
+                      codigoPais: event.codigoPais || '',
+                      codigoCiudad: event.codigoCiudad || '',
+                      paisDestino: event.paisDestino || '',
+                      tipoMoneda: event.tipoMoneda || '',
+                      tipoEvento: event.tipoEvento || 0,
+                      eventoEdad: event.eventoEdad || 0,
+                      consumoDeCarta: event.consumoDeCarta || '',
+                      nombreEvento: event.nombreEvento || '',
+                      montoVentas: event.montoVentas || 0,
+                      porcentajeRRPP: event.porcentajeRRPP || 0,
+                      efectivo: event.efectivo || 0,
+                      linkEvento: event.linkEvento || '',
+                      categorias: [],
+                      artistas: event.artistas || '',
+                      descripcionEvento: event.descripcionEvento || '',
+                      aviso: event.aviso || '',
+                      categoriasEventos: [],
+                      fechaInicio: event.fechaInicio || null,
+                      fechaFin: event.fechaFin || null,
+                      provincia: event.provincia || '',
+                      localidad: event.localidad || '',
+                      direccion: event.direccion || '',
+                      lugarEvento: event.lugarEvento || '',
+                      imgEvento: event.imgEvento || '',
+                      bannerEvento: event.bannerEvento || '',
+                      imagenDescriptiva: event.imagenDescriptiva || '',
+                      linkVideo: event.linkVideo || '',
+                      comisionServicio: event.comisionServicio || 0,
+                      eventosRelacionados: [],
+                      tickets: [],
+                      cortesiaRRPP: [],
+                      rrpp: [],
+                      totalVentas: event.totalVentas || 0,
+                      totalDevoluciones: event.totalDevoluciones || 0,
+                      totalCortesias: event.totalCortesias || 0,
+                      totalMontoVendido: event.totalMontoVendido || 0,
+                      totalMontoDescuento: event.totalMontoDescuento || 0,
+                      montoTotal: event.montoTotal || 0
+                }
+              })
+              importedCountEvents++
+          }
       }
 
       console.log(`Usuarios importados automáticamente: ${importedCount}`);

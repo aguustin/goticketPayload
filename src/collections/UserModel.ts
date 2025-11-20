@@ -5,7 +5,6 @@ export const UserModel: CollectionConfig = {
   slug: "userModel",
   admin: { useAsTitle: "nombreCompleto" },
   fields: [
-    // OCULTOS --------------
     { name: "imagenProductora", type: "text" },
     { name: "dniRepresentante", type: "number" },
     { name: "domicilioProductora", type: "text" },
@@ -18,8 +17,6 @@ export const UserModel: CollectionConfig = {
     { name: "codigoInternacional", type: "text" },
     { name: "rol", type: "number" },
     { name: "descuento", type: "number" },
-
-    // VISIBLES --------------
     { name: "nombreCompleto", type: "text" },
     { name: "dni", type: "number" },
     { name: "domicilio", type: "text" },
@@ -36,11 +33,11 @@ export const UserModel: CollectionConfig = {
     { name: "nombreTitularProductora", type: "text" },
     { name: "numeroCuenta", type: "number" },
     { name: "nombreBanco", type: "text" },
-    { name: "descuentoProductora", type: "number" },
-
+    { name: "comisionServicio", type: "number" },
     {
       name: "cortesias",
       type: "array",
+       defaultValue: [],
       fields: [
         { name: "cortesiaId", type: "text" },
         { name: "qty", type: "number" },
@@ -50,6 +47,7 @@ export const UserModel: CollectionConfig = {
     {
       name: "redes",
       type: "array",
+       defaultValue: [],
       fields: [
         { name: "instagram", type: "text" },
         { name: "facebook", type: "text" },
@@ -60,11 +58,12 @@ export const UserModel: CollectionConfig = {
     {
       name: "favorites",
       type: "array",
+       defaultValue: [],
       fields: [
         { name: "eventId", type: "text" },
       ],
     },
-  ],
+  ]
 };
 
 export default UserModel;

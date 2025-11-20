@@ -196,7 +196,7 @@ export interface UserModel {
   nombreTitularProductora?: string | null;
   numeroCuenta?: number | null;
   nombreBanco?: string | null;
-  descuentoProductora?: number | null;
+  comisionServicio?: number | null;
   cortesias?:
     | {
         cortesiaId?: string | null;
@@ -271,6 +271,7 @@ export interface TicketsModel {
   bannerEvento?: string | null;
   imagenDescriptiva?: string | null;
   linkVideo?: string | null;
+  comisionServicio?: number | null;
   eventosRelacionados?:
     | {
         idEvento?: string | null;
@@ -494,7 +495,7 @@ export interface UserModelSelect<T extends boolean = true> {
   nombreTitularProductora?: T;
   numeroCuenta?: T;
   nombreBanco?: T;
-  descuentoProductora?: T;
+  comisionServicio?: T;
   cortesias?:
     | T
     | {
@@ -568,6 +569,7 @@ export interface TicketsModelSelect<T extends boolean = true> {
   bannerEvento?: T;
   imagenDescriptiva?: T;
   linkVideo?: T;
+  comisionServicio?: T;
   eventosRelacionados?:
     | T
     | {

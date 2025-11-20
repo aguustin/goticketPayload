@@ -6,22 +6,22 @@ export const TicketsModel: CollectionConfig = {
   admin: { useAsTitle: "nombreEvento" },
   fields: [
     // OCULTOS -------------------
-    { name: "identificadorEventos", type: "text", admin: { hidden: true } },
-    { name: "userId", type: "text", admin: { hidden: true } },
-    { name: "tipoMoneda", type: "text", admin: { hidden: true } },
-    { name: "tipoEvento", type: "number", admin: { hidden: true } },
-    { name: "eventoEdad", type: "number", admin: { hidden: true } },
-    { name: "consumoDeCarta", type: "text", admin: { hidden: true } },
-    { name: "nombreEvento", type: "text", admin: { hidden: true } },
-    { name: "montoVentas", type: "number", admin: { hidden: true } },
-    { name: "porcentajeRRPP", type: "number", admin: { hidden: true } },
-    { name: "efectivo", type: "number", admin: { hidden: true } },
-    { name: "linkEvento", type: "text", admin: { hidden: true } },
+    { name: "identificadorEventos", type: "text" },
+    { name: "userId", type: "text" },
+    { name: "tipoMoneda", type: "text" },
+    { name: "tipoEvento", type: "number" },
+    { name: "eventoEdad", type: "number" },
+    { name: "consumoDeCarta", type: "text" },
+    { name: "nombreEvento", type: "text" },
+    { name: "montoVentas", type: "number" },
+    { name: "porcentajeRRPP", type: "number" },
+    { name: "efectivo", type: "number" },
+    { name: "linkEvento", type: "text" },
 
     {
       name: "categorias",
       type: "array",
-      admin: { hidden: true },
+      defaultValue: [],
       fields: [
         { name: "nombreCategoria", type: "text" },
         { name: "vendidos", type: "number" },
@@ -35,32 +35,32 @@ export const TicketsModel: CollectionConfig = {
       ],
     },
 
-    { name: "artistas", type: "text", admin: { hidden: true } },
-    { name: "descripcionEvento", type: "textarea", admin: { hidden: true } },
-    { name: "aviso", type: "textarea", admin: { hidden: true } },
+    { name: "artistas", type: "text" },
+    { name: "descripcionEvento", type: "textarea" },
+    { name: "aviso", type: "textarea" },
 
     {
       name: "categoriasEventos",
       type: "array",
-      admin: { hidden: true },
+      defaultValue: [],
       fields: [{ name: "value", type: "text" }],
     },
 
-    { name: "fechaInicio", type: "date", admin: { hidden: true } },
-    { name: "fechaFin", type: "date", admin: { hidden: true } },
-    { name: "provincia", type: "text", admin: { hidden: true } },
-    { name: "localidad", type: "text", admin: { hidden: true } },
-    { name: "direccion", type: "text", admin: { hidden: true } },
-    { name: "lugarEvento", type: "text", admin: { hidden: true } },
-    { name: "imgEvento", type: "text", admin: { hidden: true } },
-    { name: "bannerEvento", type: "text", admin: { hidden: true } },
-    { name: "imagenDescriptiva", type: "text", admin: { hidden: true } },
-    { name: "linkVideo", type: "text", admin: { hidden: true } },
-
+    { name: "fechaInicio", type: "date" },
+    { name: "fechaFin", type: "date" },
+    { name: "provincia", type: "text" },
+    { name: "localidad", type: "text" },
+    { name: "direccion", type: "text" },
+    { name: "lugarEvento", type: "text" },
+    { name: "imgEvento", type: "text" },
+    { name: "bannerEvento", type: "text" },
+    { name: "imagenDescriptiva", type: "text" },
+    { name: "linkVideo", type: "text" },
+    { name: "comisionServicio", type: "number"},
     {
       name: "eventosRelacionados",
       type: "array",
-      admin: { hidden: true },
+      defaultValue: [],
       fields: [
         { name: "idEvento", type: "text" },
       ],
@@ -69,7 +69,7 @@ export const TicketsModel: CollectionConfig = {
     {
       name: "tickets",
       type: "array",
-      admin: { hidden: true },
+      defaultValue: [],
       fields: [
         { name: "nombreTicket", type: "text" },
         { name: "descripcionTicket", type: "textarea" },
@@ -87,7 +87,7 @@ export const TicketsModel: CollectionConfig = {
     {
       name: "cortesiaRRPP",
       type: "array",
-      admin: { hidden: true },
+      defaultValue: [],
       fields: [
         { name: "nombreTicket", type: "text" },
         { name: "descripcionTicket", type: "textarea" },
@@ -106,7 +106,7 @@ export const TicketsModel: CollectionConfig = {
     {
       name: "rrpp",
       type: "array",
-      admin: { hidden: true },
+      defaultValue: [],
       fields: [
         { name: "nombre", type: "text" },
         { name: "mail", type: "email" },
@@ -117,6 +117,7 @@ export const TicketsModel: CollectionConfig = {
         {
           name: "ventasRRPP",
           type: "array",
+          defaultValue: [],
           fields: [
             { name: "ticketId", type: "text" },
             { name: "nombreCategoria", type: "text" },
@@ -128,6 +129,7 @@ export const TicketsModel: CollectionConfig = {
         {
           name: "ticketsCortesias",
           type: "array",
+          defaultValue: [],
           fields: [
             { name: "ticketIdCortesia", type: "text" },
             { name: "cantidadDeCortesias", type: "number" },
